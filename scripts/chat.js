@@ -35,13 +35,4 @@ class Chatroom {
   }
 }
 
-const chatroom = new Chatroom("gaming", "Lloyd");
 
-chatroom
-  .addChat("hello everyone")
-  .then(() => console.log("chat added"))
-  .catch(err => console.log(err));
-
-chatroom.getChats(data => {
-  console.log(data);
-});
