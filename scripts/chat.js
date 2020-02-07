@@ -3,6 +3,7 @@ class Chatroom {
     this.room = room;
     this.username = username;
     this.chats = db.collection("chats");
+    this.unsub;
   }
   async addChat(message) {
     const now = new Date();
@@ -16,7 +17,7 @@ class Chatroom {
     return response;
   }
   getChats(callback) {
-    this.chats
+    this.unsub = this.chats
       .where("room", "==", this.room)
       .orderBy("created_at")
       .onSnapshot(snapshot => {
@@ -32,7 +33,8 @@ class Chatroom {
   }
   updateRoom(room) {
     this.room = room;
+    if (this.unsub) {
+      this.unsub();
+    }
   }
 }
-
-
